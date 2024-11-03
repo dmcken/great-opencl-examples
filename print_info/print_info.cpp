@@ -1,3 +1,14 @@
+/**
+ *
+ *
+ * Compile cmd:
+ * g++ -O3 -o print_info.exe print_info.cpp -I/opt/rocm/include/ -L /opt/rocm/lib/ -lOpenCL
+ * ./print_info.exe
+ */
+
+#define CL_TARGET_OPENCL_VERSION 220
+
+
 #include <CL/cl.hpp>
 #include <iostream>
 
@@ -32,17 +43,16 @@ int main(){
 
     /**
      * Select the first device and print its information.
-     * */
-
-    auto device = devices.front();
-    auto name = device.getInfo<CL_DEVICE_NAME>();
-    auto vendor = device.getInfo<CL_DEVICE_VENDOR>();
-    auto version = device.getInfo<CL_DEVICE_VERSION>();
-    auto workItems = device.getInfo<CL_DEVICE_MAX_WORK_ITEM_SIZES>();
-    auto workGroups = device.getInfo<CL_DEVICE_MAX_WORK_GROUP_SIZE>();
+     */
+    auto device       = devices.front();
+    auto name         = device.getInfo<CL_DEVICE_NAME>();
+    auto vendor       = device.getInfo<CL_DEVICE_VENDOR>();
+    auto version      = device.getInfo<CL_DEVICE_VERSION>();
+    auto workItems    = device.getInfo<CL_DEVICE_MAX_WORK_ITEM_SIZES>();
+    auto workGroups   = device.getInfo<CL_DEVICE_MAX_WORK_GROUP_SIZE>();
     auto computeUnits = device.getInfo<CL_DEVICE_MAX_COMPUTE_UNITS>();
     auto globalMemory = device.getInfo<CL_DEVICE_GLOBAL_MEM_SIZE>();
-    auto localMemory = device.getInfo<CL_DEVICE_LOCAL_MEM_SIZE>();
+    auto localMemory  = device.getInfo<CL_DEVICE_LOCAL_MEM_SIZE>();
 
     std::cout << "OpenCL Device Info:"
     << "\nName: " << name
