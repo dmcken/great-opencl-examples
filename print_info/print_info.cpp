@@ -2,13 +2,13 @@
  *
  *
  * Compile cmd:
- * g++ -O3 -o print_info.exe print_info.cpp -I/opt/rocm/include/ -L /opt/rocm/lib/ -lOpenCL
+ * g++ -o print_info.exe print_info.cpp -I /opt/rocm/include/ -L /opt/rocm/lib/ -lOpenCL
  * ./print_info.exe
  */
-// #define CL_USE_DEPRECATED_OPENCL_1_2_APIS
-#define CL_TARGET_OPENCL_VERSION 220
+#define CL_TARGET_OPENCL_VERSION     220
+#define CL_HPP_TARGET_OPENCL_VERSION 200
 
-#include <CL/cl.hpp>
+#include <CL/cl2.hpp>
 #include <iostream>
 #include <string>
 
