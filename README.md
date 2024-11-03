@@ -6,9 +6,9 @@ This repository provides some free, organized, ready-to-compile and well-documen
 The examples in this repository require a valid implementation of OpenCL in your system. To install it, follow the next instructions according to your machine OS:
 
 ### Debian/Ubuntu
- 
- Install OpenCl headers: 
- 
+
+ Install OpenCl headers:
+
     sudo apt-get install opencl-headers
 
  Install OpenCL drivers according to your parallel computing device vendor:
@@ -21,7 +21,7 @@ The examples in this repository require a valid implementation of OpenCL in your
 
 The following instructions must be performed to install OpenCL on a Windows/OSX device:
 
- 1. Download the OpenCL SDK: 
+ 1. Download the OpenCL SDK:
 	-  Check out the website of your device vendor (*e.g.* Intel, AMD, Nvidia, etc).
  2. Set up OpenCL on your IDE:
 	- Add header file (.h) directory to includes;
@@ -34,6 +34,28 @@ For a visual demonstration of how to set up OpenCL on a Windows platform with Vi
 Each folder in this repository contains the source code of an independent and self-contained OpenCL example. Before running it, you must compile it. To do so with GCC, run the following command in a terminal:
 
     g++ -std=c++0x -o output src.cpp -lOpenCL
+
+### ROCm
+
+If you are getting allot of warnings from depreciated functions, similar to:
+```
+CL/cl.hpp:4656:36: warning: ‘_cl_sampler* clCreateSampler(cl_context, cl_bool, cl_addressing_mode, cl_filter_mode, cl_int*)’ is deprecated [-Wdeprecated-declarations]
+```
+
+Then change your includes to look like the following (replace `#include <CL/cl.hpp>`).
+
+```
+#define CL_TARGET_OPENCL_VERSION     220
+#define CL_HPP_TARGET_OPENCL_VERSION 200
+
+#include <CL/cl2.hpp>
+```
+
+As with other libraries if ROCm is not part of your normal path include them with the following:
+```
+-I /opt/rocm/include/ -L /opt/rocm/lib/
+```
+
 
 ## Bonus: OpenCL + CImg
 
